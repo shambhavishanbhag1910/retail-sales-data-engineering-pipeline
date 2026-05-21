@@ -1,0 +1,21 @@
+name: retail_sales_analytics
+version: "1.0.0"
+config-version: 2
+
+profile: retail_dbt
+
+model-paths: ["models"]
+
+models:
+  retail_sales_analytics:
+    staging:
+      +materialized: view
+      +schema: staging
+
+    marts:
+      +materialized: table
+      +schema: marts
+
+    analytics:
+      +materialized: table
+      +schema: analytics

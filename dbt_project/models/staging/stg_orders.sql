@@ -1,0 +1,8 @@
+select
+    order_id::int as order_id,
+    customer_id::int as customer_id,
+    cast(order_date as date) as order_date,
+    lower(trim(order_status)) as order_status,
+    lower(trim(payment_method)) as payment_method
+from {{ source('raw', 'raw_orders') }}
+where order_id is not null

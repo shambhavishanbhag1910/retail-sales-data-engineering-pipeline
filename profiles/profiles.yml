@@ -1,0 +1,12 @@
+retail_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: 127.0.0.1
+      user: retail_user
+      password: retail_password
+      port: 5433
+      dbname: retail_db
+      schema: analytics
+      threads: 4
