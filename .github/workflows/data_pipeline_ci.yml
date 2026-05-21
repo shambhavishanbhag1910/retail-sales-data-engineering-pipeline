@@ -1,0 +1,72 @@
+name: Retail Data Pipeline CI
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+
+jobs:
+  validate-pipeline:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: retail_user
+          POSTGRES_PASSWORD: retail_password
+          POSTGRES_DB: retail_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U retail_user -d retail_db"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      POSTGRES_USER: retail_user
+      POSTGRES_PASSWORD: retail_password
+      POSTGRES_DB: retail_db
+      POSTGRES_HOST: 127.0.0.1
+      POSTGRES_PORT: 5432
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate retail source data
+        run: |
+          python src/data_generation/generate_retail_data.py
+
+      - name: Ingest CSV data into PostgreSQL
+        run: |
+          python src/ingestion/ingest_csv_to_postgres.py
+
+      - name: Run Python data quality checks
+        run: |
+          python src/validation/data_quality_checks.py
+
+      - name: Run dbt debug
+        run: |
+          dbt debug --project-dir dbt_project --profiles-dir profiles
+
+      - name: Run dbt transformations
+        run: |
+          dbt run --project-dir dbt_project --profiles-dir profiles
+
+      - name: Run dbt tests
+        run: |
+          dbt test --project-dir dbt_project --profiles-dir profiles
