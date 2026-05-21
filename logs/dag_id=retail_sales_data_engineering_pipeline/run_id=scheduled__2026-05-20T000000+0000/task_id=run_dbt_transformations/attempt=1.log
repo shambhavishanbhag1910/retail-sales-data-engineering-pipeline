@@ -1,0 +1,63 @@
+[2026-05-21T12:42:36.924+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-05-21T12:42:36.950+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: retail_sales_data_engineering_pipeline.run_dbt_transformations scheduled__2026-05-20T00:00:00+00:00 [queued]>
+[2026-05-21T12:42:36.963+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: retail_sales_data_engineering_pipeline.run_dbt_transformations scheduled__2026-05-20T00:00:00+00:00 [queued]>
+[2026-05-21T12:42:36.964+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 2
+[2026-05-21T12:42:36.977+0000] {taskinstance.py:2890} INFO - Executing <Task(BashOperator): run_dbt_transformations> on 2026-05-20 00:00:00+00:00
+[2026-05-21T12:42:36.984+0000] {standard_task_runner.py:72} INFO - Started process 274 to run task
+[2026-05-21T12:42:36.988+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'retail_sales_data_engineering_pipeline', 'run_dbt_transformations', 'scheduled__2026-05-20T00:00:00+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/retail_sales_pipeline_dag.py', '--cfg-path', '/tmp/tmpgz1z75ux']
+[2026-05-21T12:42:36.993+0000] {standard_task_runner.py:105} INFO - Job 5: Subtask run_dbt_transformations
+[2026-05-21T12:42:37.049+0000] {task_command.py:467} INFO - Running <TaskInstance: retail_sales_data_engineering_pipeline.run_dbt_transformations scheduled__2026-05-20T00:00:00+00:00 [running]> on host 770bad4cc766
+[2026-05-21T12:42:37.147+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data_engineering_team' AIRFLOW_CTX_DAG_ID='retail_sales_data_engineering_pipeline' AIRFLOW_CTX_TASK_ID='run_dbt_transformations' AIRFLOW_CTX_EXECUTION_DATE='2026-05-20T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-20T00:00:00+00:00'
+[2026-05-21T12:42:37.149+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2026-05-21T12:42:37.164+0000] {subprocess.py:78} INFO - Tmp dir root location: /tmp
+[2026-05-21T12:42:37.167+0000] {subprocess.py:88} INFO - Running command: ['/usr/bin/bash', '-c', 'cd /opt/***/retail-sales-data-engineering-pipeline && dbt run --project-dir dbt_project --profiles-dir profiles']
+[2026-05-21T12:42:37.182+0000] {subprocess.py:99} INFO - Output:
+[2026-05-21T12:42:43.969+0000] {subprocess.py:106} INFO - [0m12:42:43  Running with dbt=1.12.0-b1
+[2026-05-21T12:42:44.534+0000] {subprocess.py:106} INFO - [0m12:42:44  Registered adapter: postgres=1.10.0
+[2026-05-21T12:42:44.881+0000] {subprocess.py:106} INFO - [0m12:42:44  Unable to do partial parsing because profile has changed
+[2026-05-21T12:42:47.612+0000] {subprocess.py:106} INFO - [0m12:42:47  Found 15 models, 30 data tests, 5 sources, 475 macros
+[2026-05-21T12:42:47.619+0000] {subprocess.py:106} INFO - [0m12:42:47
+[2026-05-21T12:42:47.621+0000] {subprocess.py:106} INFO - [0m12:42:47  Concurrency: 4 threads (target='dev')
+[2026-05-21T12:42:47.623+0000] {subprocess.py:106} INFO - [0m12:42:47
+[2026-05-21T12:42:47.900+0000] {subprocess.py:106} INFO - [0m12:42:47  1 of 15 START sql view model analytics_staging.stg_customers ................... [RUN]
+[2026-05-21T12:42:47.902+0000] {subprocess.py:106} INFO - [0m12:42:47  2 of 15 START sql view model analytics_staging.stg_inventory ................... [RUN]
+[2026-05-21T12:42:47.904+0000] {subprocess.py:106} INFO - [0m12:42:47  3 of 15 START sql view model analytics_staging.stg_order_items ................. [RUN]
+[2026-05-21T12:42:47.907+0000] {subprocess.py:106} INFO - [0m12:42:47  4 of 15 START sql view model analytics_staging.stg_orders ...................... [RUN]
+[2026-05-21T12:42:48.367+0000] {subprocess.py:106} INFO - [0m12:42:48  1 of 15 OK created sql view model analytics_staging.stg_customers .............. [[32mCREATE VIEW[0m in 0.45s]
+[2026-05-21T12:42:48.369+0000] {subprocess.py:106} INFO - [0m12:42:48  3 of 15 OK created sql view model analytics_staging.stg_order_items ............ [[32mCREATE VIEW[0m in 0.45s]
+[2026-05-21T12:42:48.371+0000] {subprocess.py:106} INFO - [0m12:42:48  4 of 15 OK created sql view model analytics_staging.stg_orders ................. [[32mCREATE VIEW[0m in 0.45s]
+[2026-05-21T12:42:48.373+0000] {subprocess.py:106} INFO - [0m12:42:48  2 of 15 OK created sql view model analytics_staging.stg_inventory .............. [[32mCREATE VIEW[0m in 0.45s]
+[2026-05-21T12:42:48.392+0000] {subprocess.py:106} INFO - [0m12:42:48  5 of 15 START sql view model analytics_staging.stg_products .................... [RUN]
+[2026-05-21T12:42:48.394+0000] {subprocess.py:106} INFO - [0m12:42:48  6 of 15 START sql table model analytics_marts.dim_customers .................... [RUN]
+[2026-05-21T12:42:48.397+0000] {subprocess.py:106} INFO - [0m12:42:48  7 of 15 START sql table model analytics_marts.dim_dates ........................ [RUN]
+[2026-05-21T12:42:48.399+0000] {subprocess.py:106} INFO - [0m12:42:48  8 of 15 START sql table model analytics_marts.fact_sales ....................... [RUN]
+[2026-05-21T12:42:48.762+0000] {subprocess.py:106} INFO - [0m12:42:48  5 of 15 OK created sql view model analytics_staging.stg_products ............... [[32mCREATE VIEW[0m in 0.35s]
+[2026-05-21T12:42:48.769+0000] {subprocess.py:106} INFO - [0m12:42:48  7 of 15 OK created sql table model analytics_marts.dim_dates ................... [[32mSELECT 337[0m in 0.36s]
+[2026-05-21T12:42:48.775+0000] {subprocess.py:106} INFO - [0m12:42:48  6 of 15 OK created sql table model analytics_marts.dim_customers ............... [[32mSELECT 500[0m in 0.36s]
+[2026-05-21T12:42:48.786+0000] {subprocess.py:106} INFO - [0m12:42:48  8 of 15 OK created sql table model analytics_marts.fact_sales .................. [[32mSELECT 2249[0m in 0.37s]
+[2026-05-21T12:42:48.789+0000] {subprocess.py:106} INFO - [0m12:42:48  9 of 15 START sql table model analytics_marts.dim_products ..................... [RUN]
+[2026-05-21T12:42:48.794+0000] {subprocess.py:106} INFO - [0m12:42:48  10 of 15 START sql table model analytics_marts.fact_inventory .................. [RUN]
+[2026-05-21T12:42:48.803+0000] {subprocess.py:106} INFO - [0m12:42:48  11 of 15 START sql table model analytics_analytics.customer_revenue_summary .... [RUN]
+[2026-05-21T12:42:48.805+0000] {subprocess.py:106} INFO - [0m12:42:48  12 of 15 START sql table model analytics_analytics.daily_sales_summary ......... [RUN]
+[2026-05-21T12:42:49.115+0000] {subprocess.py:106} INFO - [0m12:42:49  10 of 15 OK created sql table model analytics_marts.fact_inventory ............. [[32mSELECT 100[0m in 0.31s]
+[2026-05-21T12:42:49.130+0000] {subprocess.py:106} INFO - [0m12:42:49  9 of 15 OK created sql table model analytics_marts.dim_products ................ [[32mSELECT 100[0m in 0.32s]
+[2026-05-21T12:42:49.142+0000] {subprocess.py:106} INFO - [0m12:42:49  11 of 15 OK created sql table model analytics_analytics.customer_revenue_summary  [[32mSELECT 394[0m in 0.32s]
+[2026-05-21T12:42:49.143+0000] {subprocess.py:106} INFO - [0m12:42:49  13 of 15 START sql table model analytics_analytics.monthly_revenue_trend ....... [RUN]
+[2026-05-21T12:42:49.152+0000] {subprocess.py:106} INFO - [0m12:42:49  14 of 15 START sql table model analytics_analytics.low_stock_products .......... [RUN]
+[2026-05-21T12:42:49.154+0000] {subprocess.py:106} INFO - [0m12:42:49  12 of 15 OK created sql table model analytics_analytics.daily_sales_summary .... [[32mSELECT 321[0m in 0.33s]
+[2026-05-21T12:42:49.164+0000] {subprocess.py:106} INFO - [0m12:42:49  15 of 15 START sql table model analytics_analytics.top_selling_products ........ [RUN]
+[2026-05-21T12:42:49.487+0000] {subprocess.py:106} INFO - [0m12:42:49  13 of 15 OK created sql table model analytics_analytics.monthly_revenue_trend .. [[32mSELECT 13[0m in 0.33s]
+[2026-05-21T12:42:49.502+0000] {subprocess.py:106} INFO - [0m12:42:49  14 of 15 OK created sql table model analytics_analytics.low_stock_products ..... [[32mSELECT 8[0m in 0.34s]
+[2026-05-21T12:42:49.507+0000] {subprocess.py:106} INFO - [0m12:42:49  15 of 15 OK created sql table model analytics_analytics.top_selling_products ... [[32mSELECT 100[0m in 0.33s]
+[2026-05-21T12:42:49.541+0000] {subprocess.py:106} INFO - [0m12:42:49
+[2026-05-21T12:42:49.543+0000] {subprocess.py:106} INFO - [0m12:42:49  Finished running 10 table models, 5 view models in 0 hours 0 minutes and 1.92 seconds (1.92s).
+[2026-05-21T12:42:49.639+0000] {subprocess.py:106} INFO - [0m12:42:49
+[2026-05-21T12:42:49.641+0000] {subprocess.py:106} INFO - [0m12:42:49  [32mCompleted successfully[0m
+[2026-05-21T12:42:49.643+0000] {subprocess.py:106} INFO - [0m12:42:49
+[2026-05-21T12:42:49.644+0000] {subprocess.py:106} INFO - [0m12:42:49  Done. PASS=15 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=15
+[2026-05-21T12:42:51.678+0000] {subprocess.py:110} INFO - Command exited with return code 0
+[2026-05-21T12:42:51.717+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2026-05-21T12:42:51.718+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=retail_sales_data_engineering_pipeline, task_id=run_dbt_transformations, run_id=scheduled__2026-05-20T00:00:00+00:00, execution_date=20260520T000000, start_date=20260521T124236, end_date=20260521T124251
+[2026-05-21T12:42:51.778+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2026-05-21T12:42:51.804+0000] {taskinstance.py:3901} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-05-21T12:42:51.807+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
