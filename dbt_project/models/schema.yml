@@ -1,0 +1,116 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "Cleaned staging view for customer data"
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+      - name: email
+        tests:
+          - not_null
+
+  - name: stg_products
+    description: "Cleaned staging view for product data"
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
+      - name: unit_price
+        tests:
+          - not_null
+
+  - name: stg_orders
+    description: "Cleaned staging view for order header data"
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        tests:
+          - not_null
+      - name: order_date
+        tests:
+          - not_null
+
+  - name: stg_order_items
+    description: "Cleaned staging view for order line item data"
+    columns:
+      - name: order_item_id
+        tests:
+          - not_null
+          - unique
+      - name: order_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+      - name: quantity
+        tests:
+          - not_null
+      - name: unit_price
+        tests:
+          - not_null
+
+  - name: dim_customers
+    description: "Customer dimension table"
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_products
+    description: "Product dimension table"
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
+
+  - name: fact_sales
+    description: "Sales fact table containing completed order transactions"
+    columns:
+      - name: order_item_id
+        tests:
+          - not_null
+          - unique
+      - name: order_id
+        tests:
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+      - name: net_sales
+        tests:
+          - not_null
+
+  - name: fact_inventory
+    description: "Inventory fact table with low stock indicator"
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
+
+  - name: daily_sales_summary
+    description: "Daily revenue and order summary"
+    columns:
+      - name: order_date
+        tests:
+          - not_null
+
+  - name: monthly_revenue_trend
+    description: "Monthly revenue trend table"
+    columns:
+      - name: sales_month
+        tests:
+          - not_null

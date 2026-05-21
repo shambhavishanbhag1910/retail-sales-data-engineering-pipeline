@@ -1,0 +1,10 @@
+select
+    order_date,
+    count(distinct order_id) as total_orders,
+    count(distinct customer_id) as total_customers,
+    sum(quantity) as total_quantity_sold,
+    sum(gross_sales) as gross_revenue,
+    sum(net_sales) as net_revenue
+from {{ ref('fact_sales') }}
+group by order_date
+order by order_date

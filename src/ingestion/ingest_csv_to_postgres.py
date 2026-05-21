@@ -1,6 +1,6 @@
 import os
 import sys
-
+from sqlalchemy import inspect, text
 import pandas as pd
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
@@ -29,13 +29,35 @@ def read_csv_file(file_path: str) -> pd.DataFrame:
 
 def load_dataframe_to_postgres(df: pd.DataFrame, table_name: str):
     engine = get_postgres_engine()
+    inspector = inspect(engine)
 
-    df.to_sql(
-        table_name,
-        engine,
-        if_exists="replace",
-        index=False
-    )
+    table_exists = inspector.has_table(table_name, schema="public")
+
+    with engine.begin() as connection:
+        if table_exists:
+            print(f"Table already exists. Truncating table: {table_name}")
+
+            connection.execute(
+                text(f'TRUNCATE TABLE public."{table_name}"')
+            )
+
+            df.to_sql(
+                table_name,
+                connection,
+                if_exists="append",
+                index=False
+            )
+        else:
+            print(f"Table does not exist. Creating table: {table_name}")
+
+            df.to_sql(
+                table_name,
+                connection,
+                if_exists="replace",
+                index=False
+            )
+
+    print(f"Loaded {len(df)} records into table: {table_name}")
 
     print(f"Loaded {len(df)} records into table: {table_name}")
 

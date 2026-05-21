@@ -8,7 +8,9 @@ from sqlalchemy import create_engine
 BASE_DIR = Path(__file__).resolve().parents[2]
 ENV_PATH = BASE_DIR / ".env"
 
-load_dotenv(dotenv_path=ENV_PATH, override=True)
+# Load .env values only if environment variables are not already supplied.
+# This allows Docker/Airflow environment variables to override local .env.
+load_dotenv(dotenv_path=ENV_PATH, override=False)
 
 
 def get_postgres_engine():
@@ -18,7 +20,10 @@ def get_postgres_engine():
     port = os.getenv("POSTGRES_PORT")
     database = os.getenv("POSTGRES_DB")
 
-    print(f"Connecting to PostgreSQL: user={user}, host={host}, port={port}, database={database}")
+    print(
+        f"Connecting to PostgreSQL: user={user}, "
+        f"host={host}, port={port}, database={database}"
+    )
 
     connection_string = (
         f"postgresql://{user}:{password}@{host}:{port}/{database}"
