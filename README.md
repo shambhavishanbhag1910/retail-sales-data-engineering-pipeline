@@ -1,5 +1,5 @@
 # Retail Sales Data Engineering Pipeline
-
+[View deployed dashboard](https://shambhavishanbhag1910.github.io/retail-sales-data-engineering-pipeline/)
 ## Project Overview
 
 This project is an end-to-end **Retail Sales Data Engineering Pipeline** built using Python, PostgreSQL, Docker, dbt, Apache Airflow, and GitHub Actions.
